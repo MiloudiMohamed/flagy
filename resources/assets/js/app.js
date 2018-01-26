@@ -18,7 +18,6 @@ import router from './router/index.js'
  */
 
 Vue.component('app', require('./App.vue'));
-Vue.component('welcome', require('./components/Welcome.vue'));
 
 const app = new Vue({
     el: '#app',

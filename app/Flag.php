@@ -12,6 +12,6 @@ class Flag extends Model
 
 
     public function getPathAttribute() {
-        return asset('images/flags'). '/' . $this->code . '.png';
+        return strtolower(asset('images/flags'). '/' . $this->code . '.png');
     }
 }

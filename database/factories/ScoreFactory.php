@@ -7,7 +7,7 @@ $factory->define(App\Score::class, function (Faker $faker) {
         'user_id' => function() {
             return factory(App\User::class)->create()->id;
         } ,
-        'points' => rand(500, 9999),
+        'points' => rand(10, 200),
         'played_time' => rand(10, 99),
     ];
 });

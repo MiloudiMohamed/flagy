@@ -14,7 +14,8 @@ class ScoreController extends Controller
 
     public function store(Request $request)
     {
-        $points = ($request->correct * 10) + $this->checkForBonus($request->options, $request->correct);
+
+        $points = ($request->correct * 10) + $this->addBonus($request->options, $request->correct);
 
         if (!auth()->check()) {
             $this->saveIfAGuest($points);
@@ -53,7 +54,7 @@ class ScoreController extends Controller
         ]);
     }
 
-    protected function checkForBonus($options, $correct)
+    protected function addBonus($options, $correct)
     {
         if ($options['flagsNumber'] == $correct) {
             return ($correct / 2) * 10;

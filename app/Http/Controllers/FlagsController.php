@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class FlagsController extends Controller
 {
+
+    /**
+     * Get a random collection of flags
+     * @param  Request $request
+     * @return Collection
+     */
     public function index(Request $request)
     {
         $take = $request->get('take', 3);
@@ -15,11 +21,17 @@ class FlagsController extends Controller
         return ($flags);
     }
 
+    /**
+     * Return the result to the player
+     * @param  Request $request
+     * @return Integer
+     */
     public function show(Request $request)
     {
         $correct = 0;
-        for ($i=0; $i < count($request->params); $i++) {
-            if($request->params[$i]['taken'] === $request->params[$i]['correct']) {
+
+        for ($i=0; $i < count($request->all()); $i++) {
+            if($request->get($i)['taken'] === $request->get($i)['correct']) {
                 $correct++;
             }
         }

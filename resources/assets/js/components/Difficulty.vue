@@ -8,25 +8,25 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label class="radio-inline">
-                          <input type="radio" name="difficulty" id="easy" :value='{ "speed": 10, "suggestions": 2 } ' v-model="options.difficulty">
+                          <input type="radio" name="difficulty" id="easy" :value='{ "speed": 10, "suggestions": 2 }' v-model="options.difficulty">
                           <strong class="text-success">Easy</strong>
                         </label>
                     </div>
                     <div class="col-md-4">
                         <label class="radio-inline">
-                          <input type="radio" name="difficulty" id="normal" :value='{ "speed": 7, "suggestions": 4 } ' v-model="options.difficulty" >
+                          <input type="radio" name="difficulty" id="normal" :value='{ "speed": 7, "suggestions": 4 }' v-model="options.difficulty" >
                           <strong class="text-primary">Normal</strong>
                         </label>
                     </div>
                     <div class="col-md-4">
                         <label class="radio-inline">
-                          <input type="radio" name="difficulty" id="hard" :value='{ "speed": 4, "suggestions": 6 } ' v-model="options.difficulty">
+                          <input type="radio" name="difficulty" id="hard" :value='{ "speed": 4, "suggestions": 6 }' v-model="options.difficulty">
                           <strong class="text-danger">Hard</strong>
                         </label>
                     </div>
                 </div><br>
 
-                <div class="alert alert-warning" v-if="Object.keys(options.difficulty).length">
+                <div class="alert alert-info" v-if="Object.keys(options.difficulty).length">
                     <div v-if="difficulty === 'easy'">
                         <strong>Dumpers choices.</strong>
                         <ul>
@@ -108,10 +108,7 @@
                     return 'hard'
                 }
             }
-        },
-
-        mounted() {
-            console.log('Component mounted.')
         }
+
     }
 </script>

@@ -9,7 +9,7 @@
                             <!-- <h2 class="text-center">Time out</h2> -->
                             <i class="fa fa-clock-o fa-3x"></i>
                             <h4 class="">{{ delay }}</h4>
-                        </div v-if="!finished">
+                        </div>
                         <div class="well" v-if="correct !== null">
                             <p class="">You have {{ correct }} of {{ options.flagsNumber }} correct answer!</p>
                             <p class="">You earned {{ earned }} points.</p>
@@ -61,9 +61,9 @@
                         <div class="text-center" v-if="finished">
                             <h3>Congratulation, you've finished the game.</h3>
                             <span class="help-block">Click the button below to reveal your result </span>
-                            <router-link class="btn btn-default" :to="{ path: '/game' }" @click.native="getResult" >
+                            <button class="btn btn-default" @click="getResult" >
                                 <i class="fa fa-eye"></i>&nbsp; Show my result
-                            </router-link>
+                            </button>
                         </div>
 
                     </div>
@@ -150,13 +150,13 @@
                         take: this.options.difficulty.suggestions
                     }
                     }).then((response) => {
-                    this.flags = response.data
-                    this.loading = false
-                    this.delay = this.options.difficulty.speed
-                    this.timer()
-                }).catch((e) =>  {
-                    console.log(e)
-                })
+                        this.flags = response.data
+                        this.loading = false
+                        this.delay = this.options.difficulty.speed
+                        this.timer()
+                    }).catch((e) =>  {
+                        s(e)
+                    })
             },
 
             selected() {
@@ -167,7 +167,6 @@
 
             nextFlag() {
                 clearInterval(this.interval)
-                console.log(this.interval)
                 if (this.finished) {
                     return
                 }
@@ -189,21 +188,24 @@
                 if (this.alreadyPlayed === true) {
                     return
                 }
-                axios.post('/flags/result', { params: this.answer }).then((response) => {
+                axios.post('/flags/result', this.answer ).then((response) => {
                     this.correct = response.data
                     this.alreadyPlayed = true
                 }).then((response) => {
                     axios.post('score/store', {
                         'options': this.options,
                         'correct': this.correct
-                    }).then((response) => {
-                        console.log(response.data)
-
+                    }).catch((e) => {
+                        console.log(e)
                     })
                 })
+                clearInterval(this.interval)
             },
 
             restart () {
+                if (!window.confirm()) {
+                    return
+                }
                 clearInterval(this.interval)
                 this.$router.replace({ name: 'difficulty'})
             }
