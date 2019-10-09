@@ -14,9 +14,7 @@
 Route::get('/', function () {
 
     return view('welcome');
-    // $user = App\User::firstOrCreate();
-
-    // dd($user->wasRecentlyCreated);
+   
 });
 
 Auth::routes();
